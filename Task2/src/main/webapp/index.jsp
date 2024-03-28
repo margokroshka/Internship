@@ -12,8 +12,10 @@
 </style>
 <div class="outer">
     <h2>Welcome to Online shop!</h2>
-    <form action="goods.jsp" method="get">
-        <input type="text" name="name" placeholder="Enter your name" required>
+    <form action="${pageContext.request.contextPath}/goods" method="get">
+        <label>
+            <input type="text" name="name" placeholder="Enter your name" required>
+        </label>
         <br><br>
         <input type="submit" value="Enter">
     </form>

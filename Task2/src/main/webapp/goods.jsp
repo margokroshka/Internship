@@ -19,21 +19,10 @@
     }
 </style>
 <div class="outer">
-<h2>Hello <%= request.getParameter("name")%>!</h2>
-    <%
-        session.setAttribute("name", request.getParameter("name"));
-
-        if (session.getAttribute("context") == null) {
-            session.setAttribute("context", new AnnotationConfigApplicationContext(Config.class));
-        }
-
-        ApplicationContext context = (ApplicationContext) session.getAttribute("context");
-        Dao<Goods> dao = (GoodsDao) context.getBean("goodsDao");
-        request.setAttribute("goods", dao.getAll());
-    %>
+<h2>Hello ${name}!</h2>
 
     <p>Make your order</p>
-    <form id="GoodsForm" action="basket.jsp" method="post">
+    <form id="GoodsForm" action="${pageContext.request.contextPath}/basket" method="post">
         <select name="selectedProducts"  multiple>
         <c:forEach items="${goods}" var="goods">
                 <option value="${goods.id}" id="product_${goods.id}">
