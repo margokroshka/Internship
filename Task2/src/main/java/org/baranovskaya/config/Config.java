@@ -13,23 +13,14 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan("org.baranovskaya")
-@PropertySource("classpath:database.properties")
+@ComponentScan(basePackages = "org.baranovskaya")
 public class Config {
-
-    private final Environment env;
-
-    @Autowired
-    public Config(Environment env) {
-        this.env = env;
-    }
 
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .setName(env.getRequiredProperty("database_name"))
-                .addScript(env.getRequiredProperty("script"))
+                .addScript("classpath:base.sql")
                 .build();
     }
 
